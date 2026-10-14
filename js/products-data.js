@@ -1,129 +1,158 @@
 // ABIRA product catalog — edit names, prices, and copy here.
+// Prices and product names are placeholders for the demo.
 window.ABIRA_PRODUCTS = [
   {
-    "id": "bluebird",
-    "img": "product-1.webp",
-    "name": "Bluebird Set",
-    "price": "$148",
-    "desc": "A strappy double-layer bra and high-rise leggings traced with hand-drawn bluebirds in flight — quiet on the hanger, alive in motion.",
+    "id": "dragon-gold",
+    "img": "shop/dragon-gold-set.webp",
+    "name": "Dragon Gold Set",
+    "price": "$168",
+    "desc": "Our most ornate piece: gilded dragons winding through amber roses, embroidered across the bra and down both thighs. Made to be looked at.",
     "details": [
-      "Buttery brushed compression fabric",
-      "Squat-proof, four-way stretch",
-      "Hidden waistband pocket",
-      "Embroidery-look printed artwork"
+      "Strappy double-cord bra",
+      "High-rise sculpting legging",
+      "Gold-thread dragon and rose artwork",
+      "Squat-proof, zero-sheer knit"
     ],
-    "alt": "Bluebird embroidery sports bra and leggings styled with the ABIRA gym bag"
+    "alt": "Model in the Dragon Gold set — black bra and leggings with gilded dragon and amber rose embroidery"
   },
   {
-    "id": "rosa",
-    "img": "product-2.webp",
-    "name": "Rosa Set",
+    "id": "poppy-red",
+    "img": "shop/poppy-red-set.webp",
+    "name": "Poppy Field Set",
     "price": "$156",
-    "desc": "Rose-embroidered set built for impact work — sculpting, supportive, and unmistakable on the stairs, the court, or the street.",
+    "desc": "Scarlet poppies and wild greenery running the full length of the leg. Built for deep stretch and long sessions on the mat.",
     "details": [
-      "Medium-support crossback bra",
+      "Four-way stretch compression",
+      "Full-length poppy vine artwork",
+      "Medium-support bra",
+      "Flatlock anti-chafe seams"
+    ],
+    "alt": "Model stretching in the Poppy Field set with red poppy embroidery down the legs"
+  },
+  {
+    "id": "noir-tank",
+    "img": "shop/black-tank.webp",
+    "name": "Noir Layer Tank",
+    "price": "$74",
+    "desc": "A clean sleeveless tank cut long and loose to layer over any ABIRA set. Plain black, no artwork, nothing to compete — the quiet one.",
+    "details": [
+      "Relaxed drop-shoulder cut",
+      "Longline hem",
+      "Feather-light breathable jersey",
+      "Layers over every set"
+    ],
+    "alt": "Model wearing the Noir Layer Tank over embroidered leggings"
+  },
+  {
+    "id": "cherry-blossom",
+    "img": "shop/cherry-blossom-set.webp",
+    "name": "Cherry Blossom Set",
+    "price": "$162",
+    "desc": "White blossom and red cherries trailing along the hip and thigh — the lightest, brightest story in the collection.",
+    "details": [
+      "High-rise contour waistband",
+      "Blossom and cherry hip artwork",
+      "Cool-touch finish",
+      "Matching bra included"
+    ],
+    "alt": "Model in the Cherry Blossom set with white blossom and red cherry embroidery"
+  },
+  {
+    "id": "cherry-blossom-bra",
+    "img": "shop/cherry-blossom-bra.webp",
+    "name": "Cherry Blossom Bra",
+    "price": "$82",
+    "desc": "The blossom artwork on its own. A double-strap bra that holds its shape through impact and reads as a top in its own right.",
+    "details": [
+      "Double-strap back detail",
+      "Medium support, removable pads",
+      "Blossom and cherry chest artwork",
+      "Wide underband"
+    ],
+    "alt": "Close view of the Cherry Blossom bra with blossom and cherry embroidery"
+  },
+  {
+    "id": "poppy-red-bra",
+    "img": "shop/poppy-red-bra.webp",
+    "name": "Poppy Field Bra",
+    "price": "$78",
+    "desc": "A band of poppies straight across the chest. Clean lines, high neck, and enough hold to train hard in.",
+    "details": [
+      "High scoop neckline",
+      "Medium-high support",
+      "Poppy band artwork",
+      "Pairs with the Poppy Field legging"
+    ],
+    "alt": "Model wearing the Poppy Field bra with red poppy embroidery across the chest"
+  },
+  {
+    "id": "rosa-rouge",
+    "img": "shop/rosa-rouge-set.webp",
+    "name": "Rosa Rouge Set",
+    "price": "$172",
+    "desc": "Full red roses climbing from ankle to hip, with a matching rose on the bra. The house signature.",
+    "details": [
+      "Climbing rose leg artwork",
       "High-rise sculpting waistband",
-      "Sweat-wicking, quick-dry knit",
-      "Rosa artwork along the left seam"
+      "Buttery brushed interior",
+      "Hidden waistband pocket"
     ],
-    "alt": "Rose embroidery set worn mid-jump on a concrete stairway"
+    "alt": "Model kneeling in the Rosa Rouge set with red rose embroidery up the leg"
   },
   {
-    "id": "motion-jacket",
-    "img": "product-3.webp",
-    "name": "Motion Jacket",
-    "price": "$132",
-    "desc": "A zip-through training jacket with a tailored, editorial line — thumbholes, a high collar, and just enough structure to wear beyond the gym.",
-    "details": [
-      "Full-length matte zip",
-      "Thumbhole cuffs",
-      "Breathable side panels",
-      "Pairs with every ABIRA legging"
-    ],
-    "alt": "Zip training jacket and embroidered leggings in a steel corridor"
-  },
-  {
-    "id": "petal",
-    "img": "product-4.webp",
-    "name": "Petal Set + Crescent Bag",
-    "price": "$189",
-    "desc": "The full look: our floral Petal set paired with the ruched crescent gym bag — one silhouette from warm-up to walk-home.",
-    "details": [
-      "Set + bag bundle",
-      "Water-repellent crescent bag",
-      "Interior zip + bottle pockets",
-      "Petal artwork on hip and chest"
-    ],
-    "alt": "Floral embroidered leggings and sports bra with the ABIRA crescent bag"
-  },
-  {
-    "id": "trail",
-    "img": "product-5.webp",
-    "name": "Trail Set",
-    "price": "$152",
-    "desc": "Coastal-tested compression with rose embroidery that runs with you — wind-friendly, chafe-free, and built for long mornings outside.",
-    "details": [
-      "High-compression fit",
-      "Flatlock anti-chafe seams",
-      "UPF 40+ fabric",
-      "Reflective back hits"
-    ],
-    "alt": "Runner in rose-embroidered ABIRA set on a volcanic coastal trail"
-  },
-  {
-    "id": "bloom",
-    "img": "product-6.webp",
-    "name": "Bloom Set",
-    "price": "$148",
-    "desc": "Wildflower embroidery on buttery high-rise leggings and a double-strap bra — the set that started the ABIRA silhouette.",
-    "details": [
-      "Second-skin brushed fabric",
-      "Double-strap bra detail",
-      "No-slip high-rise waistband",
-      "Wildflower thigh artwork"
-    ],
-    "alt": "Runner on a hillside in wildflower-embroidered ABIRA activewear"
-  },
-  {
-    "id": "fiora",
-    "img": "product-7.webp",
-    "name": "Fiora Leggings",
+    "id": "rosa-rouge-legging",
+    "img": "shop/rosa-rouge-plank.webp",
+    "name": "Rosa Rouge Legging",
     "price": "$118",
-    "desc": "Our studio close-up favourite: dense Fiora blooms climbing both seams of a clean black high-rise legging.",
+    "desc": "The rose legging sold on its own, scattered rather than climbing. Holds through planks, pivots, and everything after.",
     "details": [
-      "High-rise, full-length cut",
-      "Dense Fiora seam artwork",
-      "Zero-sheer squat guarantee",
-      "Gusseted comfort construction"
+      "Scattered rose artwork",
+      "Second-skin compression",
+      "Gusseted construction",
+      "Ankle-length cut"
     ],
-    "alt": "Studio close-up of black leggings with dense floral artwork along both seams"
+    "alt": "Model in a side plank wearing the Rosa Rouge legging with scattered rose embroidery"
   },
   {
-    "id": "skybound",
-    "img": "product-8.webp",
-    "name": "Skybound Set",
-    "price": "$154",
-    "desc": "Made for airtime — a locked-in bra and featherweight legging with sky-blue artwork that shows itself mid-jump.",
+    "id": "duo-bundle",
+    "img": "shop/duo-set.webp",
+    "name": "The Duo Bundle",
+    "price": "$298",
+    "desc": "Two full sets, one price: Rosa Rouge and Dragon Gold together. For a training pair, or for anyone who refuses to choose.",
     "details": [
-      "High-support encapsulated bra",
-      "Featherweight legging knit",
-      "Sky artwork on calf and chest",
-      "Stay-put silicone waistband"
+      "Two complete sets (bra + legging)",
+      "Rosa Rouge and Dragon Gold",
+      "Sizes chosen separately at checkout",
+      "Saves $42 against buying apart"
     ],
-    "alt": "Woman mid-jump on a hillside in the Skybound embroidered set"
+    "alt": "Two models back to back in the Rosa Rouge and Dragon Gold sets"
   },
   {
-    "id": "coast",
-    "img": "product-9.webp",
-    "name": "Coast Set",
-    "price": "$150",
-    "desc": "A calm, coastal colour story with bluebird embroidery down the leg — soft support for stretch, strength, and slow mornings.",
+    "id": "crescent-bag",
+    "img": "shop/trio-collection.webp",
+    "name": "Crescent Crossbody",
+    "price": "$96",
+    "desc": "The quilted crossbody that finishes every look — sized for a phone, keys, and a folded wrap, worn high across the body.",
     "details": [
-      "Soft-support longline bra",
-      "Bluebird leg artwork",
-      "Cool-touch fabric",
-      "Ankle-length legging cut"
+      "Quilted water-repellent shell",
+      "Adjustable crossbody strap",
+      "Interior zip pocket",
+      "Embroidered ABIRA mark"
     ],
-    "alt": "Woman stretching on a coastal trail in the bluebird-embroidered Coast set"
+    "alt": "Three models in embroidered ABIRA sets, one wearing the Crescent Crossbody bag"
+  },
+  {
+    "id": "dragon-gold-bra",
+    "img": "shop/dragon-gold-bra.webp",
+    "name": "Dragon Gold Bra",
+    "price": "$88",
+    "desc": "Gilded dragons across the chest on a clean strappy bra — the loudest artwork on the smallest piece.",
+    "details": [
+      "Strappy double-cord back",
+      "Medium support",
+      "Gold dragon chest artwork",
+      "Wears equally as a top"
+    ],
+    "alt": "Model wearing the Dragon Gold bra with gilded dragon and rose embroidery"
   }
 ];

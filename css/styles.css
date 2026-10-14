@@ -789,6 +789,13 @@ html.is-ready .hero__cta .btn { transition-delay: .5s; }
   letter-spacing: .02em;
 }
 
+.shop-card__meta span {
+  font-family: var(--font-ui);
+  color: var(--magenta);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 .shop-card__desc {
   margin-top: .35rem;
   color: var(--grey);

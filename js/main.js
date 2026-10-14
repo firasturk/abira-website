@@ -79,6 +79,7 @@
     img.src = 'assets/' + product.img;
     img.alt = product.alt;
     document.getElementById('pdp-name').textContent = product.name;
+    document.getElementById('pdp-price').textContent = product.price;
     document.getElementById('pdp-desc').textContent = product.desc;
     const ul = document.getElementById('pdp-details');
     product.details.forEach(d => {
@@ -105,7 +106,7 @@
         '<div class="shop-card__media">' +
           '<a href="product.html?id=' + p.id + '" aria-label="' + p.name + '">' +
             '<img src="assets/' + p.img + '" loading="lazy" alt=""></a></div>' +
-        '<div class="shop-card__meta"><h3>' + p.name + '</h3></div>';
+        '<div class="shop-card__meta"><h3>' + p.name + '</h3><span>' + p.price + '</span></div>';
       grid.appendChild(card);
     }
   }
