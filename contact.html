@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — ABIRA</title>
+  <meta name="description" content="Contact ABIRA for wholesale enquiries, press, and collaborations.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;1,500&family=Montserrat:wght@400;500;600&family=Unbounded:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <div class="loader" aria-hidden="true"><img src="assets/cta-mark.png" alt=""></div>
+
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="ABIRA — home">
+      <img src="assets/logo.png" alt="ABIRA" width="150" height="84">
+    </a>
+
+    <nav class="main-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="locations.html">Find Us</a></li>
+        <li><a href="contact.html" class="is-active">Contact</a></li>
+      </ul>
+    </nav>
+
+    <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <nav aria-label="Mobile">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="products.html">Products</a>
+      <a href="locations.html">Find Us</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+
+  <main>
+    <section class="page-hero">
+      <h1 class="ah">Contact</h1>
+      <p>Wholesale enquiries, press, collaborations, or a question about a piece —
+         we read everything.</p>
+    </section>
+
+    <section class="contact">
+      <div class="contact__info">
+        <h2 class="ah">Lets work <strong>together</strong></h2>
+        <p>Tell us what you’re building. For wholesale, include your store name and
+           city — we’ll reply within two business days.</p>
+
+        <div class="contact__channels">
+          <a href="mailto:hello@abiraactive.com">hello@abiraactive.com</a>
+          <a href="tel:00962787777177">00962787777177</a>
+        </div>
+
+        <p class="contact__address">
+          ABIRA HQ<br>
+          Dubai – Motor city, fashion street 981
+        </p>
+      </div>
+
+      <form class="form" novalidate>
+        <div class="form__row">
+          <div class="field">
+            <label for="f-name">Name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required>
+            <span class="err" aria-live="polite"></span>
+          </div>
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required>
+            <span class="err" aria-live="polite"></span>
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-subject">Subject</label>
+          <input id="f-subject" name="subject" type="text" required>
+          <span class="err" aria-live="polite"></span>
+        </div>
+        <div class="field">
+          <label for="f-message">Message</label>
+          <textarea id="f-message" name="message" required></textarea>
+          <span class="err" aria-live="polite"></span>
+        </div>
+
+        <p class="form__status" hidden></p>
+
+        <button class="btn btn--solid" type="submit">Send message <span class="btn__icon" aria-hidden="true"></span></button>
+      </form>
+    </section>
+  </main>
+
+
+  <footer class="site-footer">
+    <div class="footer__brand">
+      <img src="assets/logo.png" alt="ABIRA" width="104" height="58">
+      <p>© 2026 ABIRA</p>
+      <p class="footer__legal"><a href="index.html">Privacy</a> <span aria-hidden="true">.</span> <a href="index.html">Terms</a></p>
+    </div>
+
+    <div class="footer__col">
+      <h3>Navigate</h3>
+      <ul class="footer__box">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="locations.html">Find Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h3>Follow us</h3>
+      <ul class="footer__box">
+        <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://tiktok.com" target="_blank" rel="noopener">TikTok</a></li>
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h3>Contact</h3>
+      <div class="footer__box footer__box--text">
+        <a href="mailto:hello@abiraactive.com">hello@abiraactive.com</a>
+        <a href="tel:00962787777177">00962787777177</a>
+        <p>Dubai – Motor city<br>fashion street 981</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/products-data.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

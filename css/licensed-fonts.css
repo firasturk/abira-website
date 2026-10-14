@@ -1,0 +1,29 @@
+/* ============================================================
+   Licensed fonts — Stretch Pro & AvantGarde LT Book
+   ------------------------------------------------------------
+   These are commercial typefaces, so the font files are not
+   bundled. To activate them:
+
+   1. Add your licensed files to assets/fonts/ :
+        assets/fonts/StretchPro.woff2
+        assets/fonts/AvantGardeLTBook.woff2
+   2. Add this line to the <head> of every page, after styles.css:
+        <link rel="stylesheet" href="css/licensed-fonts.css">
+
+   Until then the site automatically uses the closest Google
+   fallbacks (Unbounded for Stretch Pro, Jost for AvantGarde).
+   ============================================================ */
+
+@font-face {
+  font-family: 'Stretch Pro';
+  src: url('../assets/fonts/StretchPro.woff2') format('woff2');
+  font-weight: 400 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'AvantGarde LT Book';
+  src: url('../assets/fonts/AvantGardeLTBook.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
