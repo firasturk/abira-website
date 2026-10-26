@@ -13,12 +13,13 @@
   --plum-1:     #7E1B79;
   --plum-2:     #3A1038;
 
-  /* Licensed fonts (Stretch Pro, AvantGarde LT Book): drop the .woff2 files
-     into assets/fonts/ and they activate automatically via the @font-face
-     rules below. Until then the site falls back to Unbounded / Jost. */
-  --font-display: 'Stretch Pro', 'Unbounded', 'Montserrat', sans-serif;
+  /* Type. Unbounded, Jost and Montserrat are the adopted set, loaded from
+     Google Fonts in each page's <head>. The brief originally named Stretch
+     Pro and AvantGarde LT Book, which were never licensed; that scaffolding
+     is in git history if it is ever needed. */
+  --font-display: 'Unbounded', 'Montserrat', sans-serif;
   --font-head:    'Unbounded', 'Montserrat', sans-serif;
-  --font-body:    'AvantGarde LT Book', 'ITC Avant Garde Gothic', 'Jost', 'Century Gothic', sans-serif;
+  --font-body:    'Jost', 'Century Gothic', sans-serif;
   --font-ui:      'Montserrat', 'Jost', sans-serif;
   --font: var(--font-body);
 
