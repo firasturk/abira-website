@@ -184,7 +184,10 @@
 
     // One size products do not need a size picker
     const sizes = document.getElementById('pdp-sizes');
-    if (product.sizes === 'One size') sizes.remove();
+    if (product.sizes === 'One size') {
+      document.querySelector('.pdp__sizes-label')?.remove();
+      sizes.remove();
+    }
     else sizes.querySelectorAll('.size').forEach(btn => {
       btn.addEventListener('click', () => {
         sizes.querySelectorAll('.size').forEach(b => b.classList.remove('is-active'));

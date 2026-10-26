@@ -48,9 +48,22 @@
               'close detail of the drop hem']
   };
 
-  // cover + five details, built from the asset naming convention.
-  function gallery(id, family, label) {
-    var g = [{ img: 'cards/' + id + '.webp', alt: label + ', campaign image' }];
+  // The full-length campaign frame each card cover was cropped from. The card
+  // cover itself is the shop-grid crop and is not repeated inside the gallery.
+  var LOOK = {
+    'bluebird':     'editorial/1_bluebird.webp',
+    'wildflower':   'editorial/2_wildflower.webp',
+    'rosalia':      'editorial/3_rosalia.webp',
+    'cherry-bloom': 'editorial/4b_cherry-bloom-full.webp',
+    'dragon-rose':  'editorial/5_dragon-rose.webp',
+    'starflower':   'editorial/6_starflower.webp',
+    'refined-jacket': 'editorial/7_refined-jacket.webp',
+    'motion-top':     'editorial/8_motion-top.webp'
+  };
+
+  // Full-length look, then the five studio details. All the same size.
+  function gallery(id, family, label, look) {
+    var g = [{ img: LOOK[look], alt: label + ', full length' }];
     VIEWS[family].forEach(function (view, i) {
       g.push({ img: 'details/' + id + '-' + (i + 1) + '.webp', alt: label + ', ' + view });
     });
@@ -78,7 +91,7 @@
       composition: FABRIC,
       sizes: SIZES,
       properties: PROPS,
-      gallery: gallery(legId, 'legging', legLabel)
+      gallery: gallery(legId, 'legging', legLabel, slug)
     });
 
     items.push({
@@ -94,7 +107,7 @@
       composition: FABRIC,
       sizes: SIZES,
       properties: PROPS,
-      gallery: gallery(braId, 'bra', braLabel)
+      gallery: gallery(braId, 'bra', braLabel, slug)
     });
   });
 
@@ -110,7 +123,7 @@
     composition: 'Polyester 88% / Spandex 12%',
     sizes: SIZES,
     properties: PROPS,
-    gallery: gallery('motion-top', 'top', 'The Motion Top')
+    gallery: gallery('motion-top', 'top', 'The Motion Top', 'motion-top')
   });
 
   items.push({
@@ -125,7 +138,7 @@
     composition: FABRIC,
     sizes: SIZES,
     properties: PROPS,
-    gallery: gallery('refined-jacket', 'jacket', 'The Refined Jacket')
+    gallery: gallery('refined-jacket', 'jacket', 'The Refined Jacket', 'refined-jacket')
   });
 
   items.push({
@@ -141,7 +154,7 @@
     sizes: 'One size',
     properties: [],
     gallery: [
-      { img: 'cards/shoulder-bag.webp',     alt: 'The Active Shoulder Bag, three-quarter view' },
+      { img: 'details/shoulder-bag-1.webp', alt: 'The Active Shoulder Bag, three-quarter view' },
       { img: 'details/shoulder-bag-2.webp', alt: 'The Active Shoulder Bag, strap at full length' },
       { img: 'details/shoulder-bag-3.webp', alt: 'The Active Shoulder Bag, side view' },
       { img: 'details/shoulder-bag-4.webp', alt: 'Close detail of the gathered body and the ABIRA mark' }
@@ -161,7 +174,7 @@
     sizes: 'One size',
     properties: [],
     gallery: [
-      { img: 'cards/phone-bag.webp',     alt: 'The Essential Phone Bag, front view' },
+      { img: 'details/phone-bag-1.webp', alt: 'The Essential Phone Bag, front view' },
       { img: 'details/phone-bag-2.webp', alt: 'The Essential Phone Bag, strap at full length' },
       { img: 'details/phone-bag-3.webp', alt: 'The Essential Phone Bag, shorter strap drop' },
       { img: 'details/phone-bag-4.webp', alt: 'Close detail of the quilting, zip and the ABIRA mark' }

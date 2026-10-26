@@ -1323,16 +1323,23 @@ html.is-ready .hero__cta .btn { transition-delay: .5s; }
   aspect-ratio: 4 / 5;
   object-fit: cover;
 }
-.pdp-shot--lead { grid-column: 1 / -1; }
-/* A last frame left alone in its row runs full width rather than half-empty. */
-.pdp-shot:last-child:nth-child(even) { grid-column: 1 / -1; }
-.pdp-shot:last-child:nth-child(even) img { aspect-ratio: 16 / 11; }
+/* Every frame the same size: the full-length look first, then the details. */
 
 /* The copy follows the gallery instead of stranding it beside white space. */
 .pdp__info {
   position: sticky;
   top: clamp(5.5rem, 9vw, 7.5rem);
 }
+
+.pdp__sizes-label {
+  font-family: var(--font-ui);
+  font-size: .78rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--grey);
+  margin: 1.6rem 0 .7rem;
+}
+.pdp__desc { margin-top: 2.4rem; padding-top: 2rem; border-top: 1px solid rgba(244, 243, 241, .12); }
 
 .pdp__origin {
   font-family: var(--font-ui);
@@ -1360,19 +1367,25 @@ html.is-ready .hero__cta .btn { transition-delay: .5s; }
   padding: .4rem 1rem;
 }
 
-.pdp__prints { margin-bottom: 2rem; }
+/* Sits below the gallery as its own band, like the related row. */
+.pdp__prints {
+  background: var(--ink);
+  padding: 0 var(--pad-x) clamp(3rem, 6vw, 5rem);
+}
 .pdp__prints h2 {
   font-family: var(--font-head);
   font-weight: 300;
   text-transform: uppercase;
-  font-size: 1.05rem;
-  letter-spacing: .04em;
-  margin-bottom: 1rem;
+  font-size: clamp(1.4rem, 2.4vw, 2.1rem);
+  margin-bottom: 1.8rem;
 }
 .print-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: .7rem;
+  grid-template-columns: repeat(5, 1fr);
+  gap: clamp(1rem, 2vw, 1.8rem);
+}
+@media (max-width: 859px) {
+  .print-grid { grid-template-columns: repeat(2, 1fr); }
 }
 .print {
   padding: 0;
@@ -1383,13 +1396,13 @@ html.is-ready .hero__cta .btn { transition-delay: .5s; }
   overflow: hidden;
   transition: border-color .25s ease, color .25s ease;
 }
-.print img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; }
+.print img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block; }
 .print span {
   display: block;
   font-family: var(--font-ui);
-  font-size: .78rem;
-  letter-spacing: .04em;
-  padding: .5rem .3rem;
+  font-size: .88rem;
+  letter-spacing: .02em;
+  padding: .7rem .2rem;
 }
 .print:hover, .print:focus-visible { border-color: var(--magenta); color: var(--white); }
 .print.is-active { border-color: var(--magenta-hot); color: var(--white); }
