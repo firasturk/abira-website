@@ -120,13 +120,6 @@
 
     document.title = fullName + ' — ABIRA';
 
-    const hero = document.getElementById('pdp-img');
-    function showImage(src, alt) {
-      hero.src = 'assets/' + src;
-      hero.alt = alt || '';
-    }
-    showImage(product.img, product.alt);
-
     document.getElementById('pdp-name').textContent = fullName;
     document.getElementById('pdp-desc').textContent =
       product.desc + (product.printNote ? ' ' + product.printNote : '');
@@ -147,21 +140,18 @@
       props.remove();
     }
 
-    // Gallery thumbnails
-    const thumbs = document.getElementById('pdp-thumbs');
-    (product.gallery || []).forEach((g, i) => {
-      const b = document.createElement('button');
-      b.type = 'button';
-      b.className = 'thumb' + (i === 0 ? ' is-active' : '');
-      b.setAttribute('aria-label', g.alt);
-      b.innerHTML = '<img src="assets/' + g.img + '" loading="lazy" alt="">';
-      b.addEventListener('click', () => {
-        showImage(g.img, g.alt);
-        thumbs.querySelectorAll('.thumb').forEach(t => t.classList.remove('is-active'));
-        b.classList.add('is-active');
-      });
-      thumbs.appendChild(b);
-    });
+    // Gallery: the lifestyle frame full width, then the studio details two-up.
+    const gallery = document.getElementById('pdp-gallery');
+    const frames = product.gallery && product.gallery.length
+      ? product.gallery
+      : [{ img: product.img, alt: product.alt }];
+
+    gallery.innerHTML = frames.map((g, i) =>
+      '<figure class="pdp-shot' + (i === 0 ? ' pdp-shot--lead' : '') + '">' +
+        '<img src="assets/' + g.img + '" alt="' + (g.alt || '').replace(/"/g, '&quot;') + '"' +
+        (i === 0 ? '' : ' loading="lazy"') + '>' +
+      '</figure>'
+    ).join('');
 
     // Other prints in the same style, each its own product page
     const printsBox = document.getElementById('pdp-prints');
