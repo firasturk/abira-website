@@ -276,14 +276,13 @@
 
   /* ---------------- About film autoplay nudge ---------------- */
 
-  const film = document.querySelector('.film video');
-  if (film) {
+  document.querySelectorAll('.film video, .page-hero__film').forEach((film) => {
     const tryPlay = () => film.play().catch(() => {});
     tryPlay();
     new IntersectionObserver((entries) => {
       entries[0].isIntersecting ? tryPlay() : film.pause();
     }, { threshold: 0.2 }).observe(film);
-  }
+  });
 
   /* ---------------- Landing map: tap a pin to see the country ---------------- */
 
