@@ -228,6 +228,10 @@ a { color: inherit; text-decoration: none; }
   position: absolute;
   inset: 0;
   background:
+    /* Soft wash behind the headline. The photo is bright sunlit grass on the
+       left, which swallowed the white type; this keeps the band under it dark
+       enough to read without flattening the image. */
+    radial-gradient(120% 62% at 20% 56%, rgba(16,16,18,.58) 0%, rgba(16,16,18,.30) 46%, rgba(16,16,18,0) 74%),
     linear-gradient(180deg, rgba(24,24,24,.35) 0%, rgba(24,24,24,0) 30%),
     linear-gradient(0deg, rgba(24,24,24,.28) 0%, rgba(24,24,24,0) 26%);
 }
@@ -246,7 +250,8 @@ a { color: inherit; text-decoration: none; }
   line-height: 1.04;
   letter-spacing: .015em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, .82);
+  color: #fff;
+  text-shadow: 0 2px 28px rgba(10, 10, 12, .45);
 }
 
 .hero__cta {
@@ -1634,6 +1639,7 @@ a.print img{ transition:transform .4s ease; }
   .footer__legal a,
   .cta__line,
   .crumb,
+  .legal a,
   .contact__channels a {
     display: inline-flex;
     align-items: center;
@@ -1644,3 +1650,39 @@ a.print img{ transition:transform .4s ease; }
     min-height: 44px;
   }
 }
+
+/* ---------- Legal pages (privacy, terms) ---------- */
+.page-hero--tight { min-height: auto; padding-bottom: clamp(2rem, 5vw, 4rem); }
+
+.legal {
+  max-width: 62ch;
+  margin: 0 auto;
+  padding: clamp(2rem, 6vw, 5rem) var(--pad-x) clamp(5rem, 12vw, 9rem);
+  font-size: 1.02rem;
+  line-height: 1.75;
+  color: var(--grey);
+}
+.legal__meta {
+  font-family: var(--font-ui);
+  font-size: .76rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--grey-dim, var(--grey));
+  opacity: .66;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+.legal h2 {
+  font-family: var(--font-head);
+  font-size: clamp(1.1rem, 2.1vw, 1.4rem);
+  font-weight: 400;
+  color: var(--paper, #f4f3f1);
+  margin: clamp(2.4rem, 5vw, 3.4rem) 0 .9rem;
+  line-height: 1.3;
+}
+.legal h2:first-of-type { margin-top: 0; }
+.legal p + p { margin-top: 1rem; }
+.legal ul { margin: 1rem 0 0 1.1rem; }
+.legal li + li { margin-top: .6rem; }
+.legal strong { color: var(--paper, #f4f3f1); font-weight: 500; }
+.legal a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.legal a:hover { color: var(--magenta); }
