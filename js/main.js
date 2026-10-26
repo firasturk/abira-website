@@ -77,8 +77,8 @@
     const sub = p.print ? p.print + ' print' : (p.origin || '');
     return '<article class="shop-card ar"' + (delay ? ' style="--ar-delay:' + delay + 's"' : '') + '>' +
       '<div class="shop-card__media">' +
-        '<img src="assets/' + p.img + '" loading="lazy" alt="' + p.alt + '">' +
-        '<a class="btn btn--ghost" href="product.html?id=' + p.id + '">Check our product ' +
+        '<img src="/assets/' + p.img + '" loading="lazy" alt="' + p.alt + '">' +
+        '<a class="btn btn--ghost" href="/products/' + p.id + '">Check our product ' +
           '<span class="btn__icon" aria-hidden="true"></span></a>' +
       '</div>' +
       '<div class="shop-card__meta"><h3>' + p.name + '</h3></div>' +
@@ -114,7 +114,12 @@
   const pdp = document.getElementById('pdp');
   if (pdp && window.ABIRA_PRODUCTS) {
     const all = window.ABIRA_PRODUCTS;
-    const id = new URLSearchParams(location.search).get('id');
+    // Static pages declare their own id; product.html keeps working from ?id=
+    const qid = new URLSearchParams(location.search).get('id');
+    const id = window.ABIRA_PRODUCT_ID || qid;
+    // Send the legacy query-string URL to the canonical one so the two
+    // do not compete as duplicates.
+    if (!window.ABIRA_PRODUCT_ID && qid) { location.replace('/products/' + qid); return; }
     const product = all.find(p => p.id === id) || all[0];
     const fullName = product.name + (product.print ? ' — ' + product.print : '');
 
@@ -128,7 +133,7 @@
     setMeta('meta[property="og:description"]', blurb);
     setMeta('meta[property="og:url"]', location.href);
     const lead = (product.gallery && product.gallery[0] && product.gallery[0].img) || product.img;
-    if (lead) setMeta('meta[property="og:image"]', new URL('assets/' + lead, location.href).href);
+    if (lead) setMeta('meta[property="og:image"]', new URL('/assets/' + lead, location.href).href);
     const canon = document.head.querySelector('link[rel="canonical"]');
     if (canon) canon.setAttribute('href', location.href);
 
@@ -160,7 +165,7 @@
 
     gallery.innerHTML = frames.map((g, i) =>
       '<figure class="pdp-shot' + (i === 0 ? ' pdp-shot--lead' : '') + '">' +
-        '<img src="assets/' + g.img + '" alt="' + (g.alt || '').replace(/"/g, '&quot;') + '"' +
+        '<img src="/assets/' + g.img + '" alt="' + (g.alt || '').replace(/"/g, '&quot;') + '"' +
         (i === 0 ? '' : ' loading="lazy"') + '>' +
       '</figure>'
     ).join('');
@@ -176,8 +181,8 @@
       siblings.forEach(pr => {
         const a = document.createElement('a');
         a.className = 'print';
-        a.href = 'product.html?id=' + pr.id;
-        a.innerHTML = '<img src="assets/' + pr.img + '" loading="lazy" alt="">' +
+        a.href = '/products/' + pr.id;
+        a.innerHTML = '<img src="/assets/' + pr.img + '" loading="lazy" alt="">' +
                       '<span>' + pr.print + '</span>';
         printGrid.appendChild(a);
       });
@@ -226,8 +231,8 @@
       const label = p.name + (p.print ? ' — ' + p.print : '');
       card.innerHTML =
         '<div class="shop-card__media">' +
-          '<a href="product.html?id=' + p.id + '" aria-label="' + label + '">' +
-            '<img src="assets/' + p.img + '" loading="lazy" alt=""></a></div>' +
+          '<a href="/products/' + p.id + '" aria-label="' + label + '">' +
+            '<img src="/assets/' + p.img + '" loading="lazy" alt=""></a></div>' +
         '<div class="shop-card__meta"><h3>' + label + '</h3></div>';
       grid.appendChild(card);
     });
