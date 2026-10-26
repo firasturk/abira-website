@@ -75,38 +75,105 @@
     const product = all.find(p => p.id === id) || all[0];
 
     document.title = product.name + ' — ABIRA';
-    const img = document.getElementById('pdp-img');
-    img.src = 'assets/' + product.img;
-    img.alt = product.alt;
+
+    const hero = document.getElementById('pdp-img');
+    function showImage(src, alt) {
+      hero.src = 'assets/' + src;
+      hero.alt = alt || '';
+    }
+    showImage(product.img, product.alt);
+
     document.getElementById('pdp-name').textContent = product.name;
-    document.getElementById('pdp-price').textContent = product.price;
     document.getElementById('pdp-desc').textContent = product.desc;
-    const ul = document.getElementById('pdp-details');
-    product.details.forEach(d => {
-      const li = document.createElement('li');
-      li.textContent = d;
-      ul.appendChild(li);
+
+    const origin = document.getElementById('pdp-origin');
+    if (product.origin) origin.textContent = product.origin;
+    else origin.remove();
+
+    // Fabric properties
+    const props = document.getElementById('pdp-props');
+    if (product.properties && product.properties.length) {
+      product.properties.forEach(t => {
+        const li = document.createElement('li');
+        li.textContent = t;
+        props.appendChild(li);
+      });
+    } else {
+      props.remove();
+    }
+
+    // Gallery thumbnails
+    const thumbs = document.getElementById('pdp-thumbs');
+    (product.gallery || []).forEach((g, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'thumb' + (i === 0 ? ' is-active' : '');
+      b.setAttribute('aria-label', g.alt);
+      b.innerHTML = '<img src="assets/' + g.img + '" loading="lazy" alt="">';
+      b.addEventListener('click', () => {
+        showImage(g.img, g.alt);
+        thumbs.querySelectorAll('.thumb').forEach(t => t.classList.remove('is-active'));
+        b.classList.add('is-active');
+      });
+      thumbs.appendChild(b);
     });
 
-    document.querySelectorAll('.pdp__sizes .size').forEach(btn => {
+    // Prints: clicking one swaps the hero image
+    const printsBox = document.getElementById('pdp-prints');
+    const printGrid = document.getElementById('print-grid');
+    if (product.prints && product.prints.length) {
+      printsBox.hidden = false;
+      product.prints.forEach(pr => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'print';
+        b.innerHTML = '<img src="assets/' + pr.img + '" loading="lazy" alt="">' +
+                      '<span>' + pr.name + '</span>';
+        b.addEventListener('click', () => {
+          showImage(pr.img, product.name + ' in the ' + pr.name + ' print');
+          printGrid.querySelectorAll('.print').forEach(x => x.classList.remove('is-active'));
+          b.classList.add('is-active');
+          thumbs.querySelectorAll('.thumb').forEach(t => t.classList.remove('is-active'));
+        });
+        printGrid.appendChild(b);
+      });
+    }
+
+    // Specification list
+    const spec = document.getElementById('pdp-spec');
+    const rows = [['Composition', product.composition], ['Sizes', product.sizes]];
+    if (product.prints && product.prints.length) {
+      rows.push(['Prints', product.prints.map(p => p.name).join(', ')]);
+    }
+    rows.forEach(([k, v]) => {
+      if (!v) return;
+      const dt = document.createElement('dt'); dt.textContent = k;
+      const dd = document.createElement('dd'); dd.textContent = v;
+      spec.appendChild(dt); spec.appendChild(dd);
+    });
+
+    // One size products do not need a size picker
+    const sizes = document.getElementById('pdp-sizes');
+    if (product.sizes === 'One size') sizes.remove();
+    else sizes.querySelectorAll('.size').forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.pdp__sizes .size').forEach(b => b.classList.remove('is-active'));
+        sizes.querySelectorAll('.size').forEach(b => b.classList.remove('is-active'));
         btn.classList.add('is-active');
       });
     });
 
-    // Related: the next three pieces in the catalog
+    // Related: the next three pieces in the catalogue
     const grid = document.getElementById('related-grid');
-    const start = all.indexOf(product);
+    const startIdx = all.indexOf(product);
     for (let i = 1; i <= 3; i++) {
-      const p = all[(start + i) % all.length];
+      const p = all[(startIdx + i) % all.length];
       const card = document.createElement('article');
       card.className = 'shop-card';
       card.innerHTML =
         '<div class="shop-card__media">' +
           '<a href="product.html?id=' + p.id + '" aria-label="' + p.name + '">' +
             '<img src="assets/' + p.img + '" loading="lazy" alt=""></a></div>' +
-        '<div class="shop-card__meta"><h3>' + p.name + '</h3><span>' + p.price + '</span></div>';
+        '<div class="shop-card__meta"><h3>' + p.name + '</h3></div>';
       grid.appendChild(card);
     }
   }

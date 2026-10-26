@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product — ABIRA</title>
+  <title>Product, ABIRA</title>
   <meta name="description" content="ABIRA product details: fabric, fit, and artwork for every piece in the collection.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,13 +46,24 @@
 
   <main>
     <section class="pdp" id="pdp">
-      <figure class="pdp__media ar in"><img id="pdp-img" alt="" width="900" height="1125"></figure>
+      <div class="pdp__media">
+        <figure class="pdp__hero"><img id="pdp-img" alt="" width="900" height="1125"></figure>
+        <div class="pdp__thumbs" id="pdp-thumbs"></div>
+      </div>
       <div class="pdp__info">
-        <a class="crumb" href="products.html">← All products</a>
+        <a class="crumb" href="products.html">Back to all products</a>
         <h1 id="pdp-name">Product</h1>
-        <p class="pdp__price" id="pdp-price"></p>
+        <p class="pdp__origin" id="pdp-origin"></p>
         <p class="pdp__desc" id="pdp-desc"></p>
-        <ul class="pdp__details" id="pdp-details"></ul>
+
+        <ul class="pdp__props" id="pdp-props"></ul>
+
+        <div class="pdp__prints" id="pdp-prints" hidden>
+          <h2>Prints</h2>
+          <div class="print-grid" id="print-grid"></div>
+        </div>
+
+        <dl class="pdp__spec" id="pdp-spec"></dl>
 
         <div class="pdp__sizes" id="pdp-sizes" role="group" aria-label="Select size">
           <button class="size" type="button">XS</button>
@@ -106,7 +117,7 @@
       <div class="footer__box footer__box--text">
         <a href="mailto:hello@abiraactive.com">hello@abiraactive.com</a>
         <a href="tel:00962796963100">00962796963100</a>
-        <p>Dubai – Motor city<br>fashion street 981</p>
+        <p>Dubai, Motor city<br>fashion street 981</p>
       </div>
     </div>
   </footer>
