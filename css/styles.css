@@ -1617,3 +1617,30 @@ a.print img{ transition:transform .4s ease; }
 @media (prefers-reduced-motion: reduce) {
   .page-hero__film { display: none; }
 }
+
+/* ---------- Touch targets ----------
+   Links in the footer and the legal row sit well under the 44px the WCAG
+   target-size guidance asks for on a phone. Pad them out on touch screens
+   only, so the desktop layout is untouched. */
+@media (pointer: coarse), (max-width: 760px) {
+  .footer__box a,
+  .footer__box--text a,
+  .main-nav a,
+  .mobile-menu nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .footer__legal a,
+  .cta__line,
+  .crumb,
+  .contact__channels a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-inline: 2px;
+  }
+  .shop-filter {
+    min-height: 44px;
+  }
+}

@@ -120,6 +120,18 @@
 
     document.title = fullName + ' — ABIRA';
 
+    // Keep the page description, canonical and share card in step with the product.
+    const blurb = (product.desc || '').replace(/\s+/g, ' ').trim().slice(0, 155);
+    const setMeta = (sel, val) => { const el = document.head.querySelector(sel); if (el) el.setAttribute('content', val); };
+    setMeta('meta[name="description"]', blurb);
+    setMeta('meta[property="og:title"]', fullName + ' — ABIRA');
+    setMeta('meta[property="og:description"]', blurb);
+    setMeta('meta[property="og:url"]', location.href);
+    const lead = (product.gallery && product.gallery[0] && product.gallery[0].img) || product.img;
+    if (lead) setMeta('meta[property="og:image"]', new URL('assets/' + lead, location.href).href);
+    const canon = document.head.querySelector('link[rel="canonical"]');
+    if (canon) canon.setAttribute('href', location.href);
+
     document.getElementById('pdp-name').textContent = fullName;
     document.getElementById('pdp-desc').textContent =
       product.desc + (product.printNote ? ' ' + product.printNote : '');
@@ -325,12 +337,47 @@
         return;
       }
 
-      status.hidden = false;
-      status.textContent = 'Thanks, ' + name.value.trim().split(' ')[0] +
-        ' — your message is on its way. We reply within two business days.';
-      form.reset();
-      form.querySelectorAll('input, textarea').forEach(i => i.removeAttribute('aria-invalid'));
-      status.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      const firstName = name.value.trim().split(' ')[0];
+      const endpoint = form.dataset.endpoint;
+      const btn = form.querySelector('button[type="submit"]');
+
+      const show = (msg) => {
+        status.hidden = false;
+        status.textContent = msg;
+        status.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      };
+      const clear = () => {
+        form.reset();
+        form.querySelectorAll('input, textarea').forEach(i => i.removeAttribute('aria-invalid'));
+      };
+
+      if (endpoint) {
+        btn.disabled = true;
+        show('Sending…');
+        fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        }).then((r) => {
+          if (!r.ok) throw new Error(r.status);
+          show('Thanks, ' + firstName + '. Your message is with us. We reply within two business days.');
+          clear();
+        }).catch(() => {
+          show('Sorry, that did not go through. Please email us at hello@abiraactive.com and we will pick it up from there.');
+        }).finally(() => { btn.disabled = false; });
+        return;
+      }
+
+      // No endpoint configured: hand the message to the visitor's mail app,
+      // which actually delivers it, instead of claiming it was sent.
+      const body = 'Name: ' + name.value.trim() +
+        '\nEmail: ' + email.value.trim() +
+        '\n\n' + message.value.trim();
+      window.location.href = 'mailto:hello@abiraactive.com' +
+        '?subject=' + encodeURIComponent(subject.value.trim()) +
+        '&body=' + encodeURIComponent(body);
+      show('Thanks, ' + firstName + '. Your email app is opening with the message ready — press send and it reaches us.');
+      clear();
     });
   }
 
