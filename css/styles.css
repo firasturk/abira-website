@@ -1479,3 +1479,34 @@ html.is-ready .hero__cta .btn { transition-delay: .5s; }
   .pdp__spec { grid-template-columns: 1fr; gap: .2rem .4rem; }
   .pdp__spec dd { margin-bottom: .7rem; }
 }
+
+/* ---------- Products: family filters ---------- */
+
+.shop__filters{
+  display:flex; flex-wrap:wrap; gap:.5rem;
+  justify-content:center;
+  margin:0 auto 3rem;
+  padding:0 1rem;
+}
+.shop-filter{
+  font-family:var(--font-ui, inherit);
+  font-size:.74rem; letter-spacing:.14em; text-transform:uppercase;
+  padding:.72rem 1.25rem;
+  border:1px solid rgba(0,0,0,.16); border-radius:999px;
+  background:transparent; color:inherit; cursor:pointer;
+  transition:background .25s ease, color .25s ease, border-color .25s ease;
+}
+.shop-filter span{ opacity:.45; margin-left:.45em; }
+.shop-filter:hover{ border-color:rgba(0,0,0,.45); }
+.shop-filter.is-active{ background:#111; border-color:#111; color:#fff; }
+.shop-filter.is-active span{ opacity:.6; }
+
+/* ---------- Product detail: sibling prints ---------- */
+
+a.print{ text-decoration:none; color:inherit; display:block; }
+a.print:hover img{ transform:scale(1.04); }
+a.print img{ transition:transform .4s ease; }
+
+@media (prefers-reduced-motion:reduce){
+  .shop-filter, a.print img{ transition:none; }
+}

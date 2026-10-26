@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Products, ABIRA</title>
-  <meta name="description" content="The ABIRA collection: nine embroidered sets, leggings, jackets, and gym bags produced in limited runs.">
+  <meta name="description" content="The ABIRA collection: six signature prints across leggings and sports bras, plus a top, a jacket and two bags.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;1,500&family=Montserrat:wght@400;500;600&family=Unbounded:wght@300;400;500&display=swap" rel="stylesheet">
@@ -52,58 +52,14 @@
     </section>
 
     <section class="shop" id="products">
-      <div class="shop__grid">
-        <article class="shop-card ar">
-          <div class="shop-card__media">
-            <img src="assets/shoot/678A2603.webp" loading="lazy" alt="Model wearing The Signature Legging in the Bluebird print">
-            <a class="btn btn--ghost" href="product.html?id=signature-legging">Check our product <span class="btn__icon" aria-hidden="true"></span></a>
-          </div>
-          <div class="shop-card__meta"><h3>The Signature Legging</h3></div>
-          <p class="shop-card__sub">Designed in Colombia · 6 prints</p>
-          <p class="shop-card__desc">A sculpting, high-rise legging featuring signature artwork.</p>
-        </article>
-        <article class="shop-card ar" style="--ar-delay:.12s">
-          <div class="shop-card__media">
-            <img src="assets/shoot/678A2337.webp" loading="lazy" alt="Model wearing The Signature Sports Bra in the Starflower print">
-            <a class="btn btn--ghost" href="product.html?id=signature-sports-bra">Check our product <span class="btn__icon" aria-hidden="true"></span></a>
-          </div>
-          <div class="shop-card__meta"><h3>The Signature Sports Bra</h3></div>
-          <p class="shop-card__sub">Designed in Colombia · 6 prints</p>
-          <p class="shop-card__desc">A supportive sports bra featuring signature artwork.</p>
-        </article>
-        <article class="shop-card ar" style="--ar-delay:.24s">
-          <div class="shop-card__media">
-            <img src="assets/shoot/678A2515.webp" loading="lazy" alt="Model wearing The Motion Top, front view">
-            <a class="btn btn--ghost" href="product.html?id=motion-top">Check our product <span class="btn__icon" aria-hidden="true"></span></a>
-          </div>
-          <div class="shop-card__meta"><h3>The Motion Top</h3></div>
-          <p class="shop-card__desc">A lightweight top designed for easy coverage and effortless movement.</p>
-        </article>
-        <article class="shop-card ar">
-          <div class="shop-card__media">
-            <img src="assets/shoot/678A2361.webp" loading="lazy" alt="Model wearing The Refined Jacket, front view with the ABIRA mark on the chest">
-            <a class="btn btn--ghost" href="product.html?id=refined-jacket">Check our product <span class="btn__icon" aria-hidden="true"></span></a>
-          </div>
-          <div class="shop-card__meta"><h3>The Refined Jacket</h3></div>
-          <p class="shop-card__desc">Designed with hidden pockets for functionality, finished with a clean silhouette.</p>
-        </article>
-        <article class="shop-card ar" style="--ar-delay:.12s">
-          <div class="shop-card__media">
-            <img src="assets/shoot/678A2386.webp" loading="lazy" alt="Model holding The Active Shoulder Bag">
-            <a class="btn btn--ghost" href="product.html?id=active-shoulder-bag">Check our product <span class="btn__icon" aria-hidden="true"></span></a>
-          </div>
-          <div class="shop-card__meta"><h3>The Active Shoulder Bag</h3></div>
-          <p class="shop-card__desc">A soft, lightweight everyday bag designed from life on the go.</p>
-        </article>
-        <article class="shop-card ar" style="--ar-delay:.24s">
-          <div class="shop-card__media">
-            <img src="assets/shoot/678A2393.webp" loading="lazy" alt="Model carrying The Essential Phone Bag">
-            <a class="btn btn--ghost" href="product.html?id=essential-phone-bag">Check our product <span class="btn__icon" aria-hidden="true"></span></a>
-          </div>
-          <div class="shop-card__meta"><h3>The Essential Phone Bag</h3></div>
-          <p class="shop-card__desc">A crossbody phone bag designed to carry your phone and essentials.</p>
-        </article>
+      <div class="shop__filters" role="tablist" aria-label="Filter products">
+        <button class="shop-filter is-active" type="button" data-family="all">All <span>16</span></button>
+        <button class="shop-filter" type="button" data-family="legging">Leggings <span>6</span></button>
+        <button class="shop-filter" type="button" data-family="bra">Sports Bras <span>6</span></button>
+        <button class="shop-filter" type="button" data-family="layer">Tops &amp; Outerwear <span>2</span></button>
+        <button class="shop-filter" type="button" data-family="bag">Bags <span>2</span></button>
       </div>
+      <div class="shop__grid" id="shop-grid"></div>
     </section>
   </main>
 

@@ -61,10 +61,53 @@
       });
     }, { threshold: 0.2 });
     heads.forEach(h => headObserver.observe(h));
+    // Lets later-rendered content (the products grid) join the same reveal.
+    window.ABIRA_REVEAL = (root) =>
+      root.querySelectorAll('.ah, .ar').forEach(el => headObserver.observe(el));
   } else {
     heads.forEach(h => h.classList.add('in'));
+    window.ABIRA_REVEAL = (root) =>
+      root.querySelectorAll('.ah, .ar').forEach(el => el.classList.add('in'));
   }
 
+
+  /* ---------------- Products grid ---------------- */
+
+  function cardMarkup(p, delay) {
+    const sub = p.print ? p.print + ' print' : (p.origin || '');
+    return '<article class="shop-card ar"' + (delay ? ' style="--ar-delay:' + delay + 's"' : '') + '>' +
+      '<div class="shop-card__media">' +
+        '<img src="assets/' + p.img + '" loading="lazy" alt="' + p.alt + '">' +
+        '<a class="btn btn--ghost" href="product.html?id=' + p.id + '">Check our product ' +
+          '<span class="btn__icon" aria-hidden="true"></span></a>' +
+      '</div>' +
+      '<div class="shop-card__meta"><h3>' + p.name + '</h3></div>' +
+      (sub ? '<p class="shop-card__sub">' + sub + '</p>' : '') +
+      '<p class="shop-card__desc">' + p.desc + '</p>' +
+    '</article>';
+  }
+
+  const shopGrid = document.getElementById('shop-grid');
+  if (shopGrid && window.ABIRA_PRODUCTS) {
+    const all = window.ABIRA_PRODUCTS;
+    const family = p => (p.family === 'top' || p.family === 'outerwear') ? 'layer' : p.family;
+
+    function renderGrid(filter) {
+      const list = filter === 'all' ? all : all.filter(p => family(p) === filter);
+      shopGrid.innerHTML = list.map((p, i) => cardMarkup(p, (i % 4) * 0.08)).join('');
+      if (window.ABIRA_REVEAL) window.ABIRA_REVEAL(shopGrid);
+      else shopGrid.querySelectorAll('.ar').forEach(el => el.classList.add('in'));
+    }
+    renderGrid('all');
+
+    document.querySelectorAll('.shop-filter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.shop-filter').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        renderGrid(btn.dataset.family);
+      });
+    });
+  }
 
   /* ---------------- Product detail page ---------------- */
 
@@ -73,8 +116,9 @@
     const all = window.ABIRA_PRODUCTS;
     const id = new URLSearchParams(location.search).get('id');
     const product = all.find(p => p.id === id) || all[0];
+    const fullName = product.name + (product.print ? ' — ' + product.print : '');
 
-    document.title = product.name + ' — ABIRA';
+    document.title = fullName + ' — ABIRA';
 
     const hero = document.getElementById('pdp-img');
     function showImage(src, alt) {
@@ -83,8 +127,9 @@
     }
     showImage(product.img, product.alt);
 
-    document.getElementById('pdp-name').textContent = product.name;
-    document.getElementById('pdp-desc').textContent = product.desc;
+    document.getElementById('pdp-name').textContent = fullName;
+    document.getElementById('pdp-desc').textContent =
+      product.desc + (product.printNote ? ' ' + product.printNote : '');
 
     const origin = document.getElementById('pdp-origin');
     if (product.origin) origin.textContent = product.origin;
@@ -118,33 +163,28 @@
       thumbs.appendChild(b);
     });
 
-    // Prints: clicking one swaps the hero image
+    // Other prints in the same style, each its own product page
     const printsBox = document.getElementById('pdp-prints');
     const printGrid = document.getElementById('print-grid');
-    if (product.prints && product.prints.length) {
+    const siblings = product.print
+      ? all.filter(p => p.family === product.family && p.id !== product.id)
+      : [];
+    if (siblings.length) {
       printsBox.hidden = false;
-      product.prints.forEach(pr => {
-        const b = document.createElement('button');
-        b.type = 'button';
-        b.className = 'print';
-        b.innerHTML = '<img src="assets/' + pr.img + '" loading="lazy" alt="">' +
-                      '<span>' + pr.name + '</span>';
-        b.addEventListener('click', () => {
-          showImage(pr.img, product.name + ' in the ' + pr.name + ' print');
-          printGrid.querySelectorAll('.print').forEach(x => x.classList.remove('is-active'));
-          b.classList.add('is-active');
-          thumbs.querySelectorAll('.thumb').forEach(t => t.classList.remove('is-active'));
-        });
-        printGrid.appendChild(b);
+      siblings.forEach(pr => {
+        const a = document.createElement('a');
+        a.className = 'print';
+        a.href = 'product.html?id=' + pr.id;
+        a.innerHTML = '<img src="assets/' + pr.img + '" loading="lazy" alt="">' +
+                      '<span>' + pr.print + '</span>';
+        printGrid.appendChild(a);
       });
     }
 
     // Specification list
     const spec = document.getElementById('pdp-spec');
     const rows = [['Composition', product.composition], ['Sizes', product.sizes]];
-    if (product.prints && product.prints.length) {
-      rows.push(['Prints', product.prints.map(p => p.name).join(', ')]);
-    }
+    if (product.print) rows.push(['Print', product.print]);
     rows.forEach(([k, v]) => {
       if (!v) return;
       const dt = document.createElement('dt'); dt.textContent = k;
@@ -162,20 +202,30 @@
       });
     });
 
-    // Related: the next three pieces in the catalogue
+    // Related: pieces from other styles, starting with the matching set
     const grid = document.getElementById('related-grid');
-    const startIdx = all.indexOf(product);
-    for (let i = 1; i <= 3; i++) {
-      const p = all[(startIdx + i) % all.length];
+    const mate = product.print
+      ? all.find(p => p.print === product.print && p.family !== product.family)
+      : null;
+    const taken = new Set([product.id].concat(mate ? [mate.id] : []));
+    const related = mate ? [mate] : [];
+    // One piece from each remaining family, so the row is not six of the same thing.
+    ['outerwear', 'top', 'bag', 'legging', 'bra'].forEach(fam => {
+      if (related.length >= 3) return;
+      const pick = all.find(p => p.family === fam && p.family !== product.family && !taken.has(p.id));
+      if (pick) { related.push(pick); taken.add(pick.id); }
+    });
+    related.forEach(p => {
       const card = document.createElement('article');
       card.className = 'shop-card';
+      const label = p.name + (p.print ? ' — ' + p.print : '');
       card.innerHTML =
         '<div class="shop-card__media">' +
-          '<a href="product.html?id=' + p.id + '" aria-label="' + p.name + '">' +
+          '<a href="product.html?id=' + p.id + '" aria-label="' + label + '">' +
             '<img src="assets/' + p.img + '" loading="lazy" alt=""></a></div>' +
-        '<div class="shop-card__meta"><h3>' + p.name + '</h3></div>';
+        '<div class="shop-card__meta"><h3>' + label + '</h3></div>';
       grid.appendChild(card);
-    }
+    });
   }
 
   /* ---------------- Locations map ---------------- */
