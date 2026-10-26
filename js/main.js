@@ -354,10 +354,14 @@
       if (endpoint) {
         btn.disabled = true;
         show('Sending…');
+        const data = new FormData(form);
+        // Formspree reads _subject for the email subject line and uses the
+        // email field as reply-to, so a reply goes straight back to them.
+        data.set('_subject', 'ABIRA site: ' + subject.value.trim());
         fetch(endpoint, {
           method: 'POST',
           headers: { 'Accept': 'application/json' },
-          body: new FormData(form)
+          body: data
         }).then((r) => {
           if (!r.ok) throw new Error(r.status);
           show('Thanks, ' + firstName + '. Your message is with us. We reply within two business days.');

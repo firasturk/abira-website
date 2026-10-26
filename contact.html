@@ -79,9 +79,12 @@
         </p>
       </div>
 
-      <!-- Set data-endpoint to a form service URL (Formspree, Web3Forms, …)
-           and the form posts there instead of opening the visitor's mail app. -->
-      <form class="form" novalidate data-endpoint="">
+      <!-- Posts to Formspree. Clear data-endpoint and the form falls back to
+           opening the visitor's mail app with the message ready. -->
+      <form class="form" novalidate data-endpoint="https://formspree.io/f/mkjjjknz">
+        <!-- Formspree honeypot: bots fill it, people never see it. -->
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"
+               aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <div class="form__row">
           <div class="field">
             <label for="f-name">Name</label>
