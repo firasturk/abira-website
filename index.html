@@ -7,9 +7,18 @@
   <meta name="description" content="ABIRA makes premium activewear with an editorial eye, pieces that hold their shape, their purpose, and their place in a woman's wider wardrobe.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;1,500&family=Montserrat:wght@400;500;600&family=Unbounded:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="assets/hero.webp">
-  <link rel="preload" as="image" href="assets/frames/frame_001.webp">
+  <!-- The font stylesheet is a third-party request that used to block the
+       first paint for ~750ms. Loading it as print and flipping the media on
+       load takes it off the critical path; display=swap means text is
+       readable in the fallback face until it arrives. -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;1,500&family=Montserrat:wght@400;500;600&family=Unbounded:wght@300;400;500&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;1,500&family=Montserrat:wght@400;500;600&family=Unbounded:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;1,500&family=Montserrat:wght@400;500;600&family=Unbounded:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
+  <!-- Phones get the 1200px hero; the reel's frames are no longer preloaded,
+       they were competing with it for bandwidth. -->
+  <link rel="preload" as="image" href="assets/hero.webp"
+        imagesrcset="assets/hero-1200.webp 1200w, assets/hero.webp 2000w"
+        imagesizes="100vw" fetchpriority="high">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -62,7 +71,7 @@
 </head>
 <body>
 
-  <div class="loader" aria-hidden="true"><img src="assets/cta-mark.png" alt=""></div>
+  <div class="loader" aria-hidden="true"><img src="assets/cta-mark.png" alt="" width="414" height="257"></div>
 
   <header class="site-header">
     <a class="brand" href="index.html" aria-label="ABIRA — home">
@@ -98,11 +107,15 @@
 
     <section class="hero" id="home">
       <img class="hero__img" src="assets/hero.webp"
+           srcset="assets/hero-1200.webp 1200w, assets/hero.webp 2000w" sizes="100vw"
+           width="2000" height="1342"
            alt="Four women training on a windswept green hillside in black ABIRA activewear with floral prints" fetchpriority="high">
       <div class="hero__scrim" aria-hidden="true"></div>
 
       <h1 class="hero__title"><span class="line">Fashion</span><span class="line">in&nbsp;Motion</span></h1>
-      <img class="hero__cutout" src="assets/hero-cutout.png" alt="" aria-hidden="true">
+      <img class="hero__cutout" src="assets/hero-cutout.webp"
+           srcset="assets/hero-cutout-1200.webp 1200w, assets/hero-cutout.webp 1600w" sizes="100vw"
+           width="1600" height="1074" alt="" aria-hidden="true">
 
       <div class="hero__cta">
         <p class="find-us-label">Find us</p>
@@ -125,7 +138,7 @@
       </div>
       <figure class="about__media ar">
         <img src="assets/about.webp" loading="lazy"
-             alt="Two women warming up and running along a volcanic coastal trail at sunrise in black activewear with floral prints">
+             alt="Two women warming up and running along a volcanic coastal trail at sunrise in black activewear with floral prints" width="1400" height="939">
       </figure>
     </section>
 
@@ -135,13 +148,13 @@
         designed to empower<br>
         beyond <em>performance.</em>
       </h2>
-      <img class="statement__deco" src="assets/illustration.png" alt="" aria-hidden="true" loading="lazy">
+      <img class="statement__deco" src="assets/illustration.webp" width="1500" height="932" alt="" aria-hidden="true" loading="lazy">
     </section>
 
     <section class="reel" id="reel" aria-label="The ABIRA transformation">
       <div class="reel__sticky">
         <canvas class="reel__canvas" aria-hidden="true"></canvas>
-        <img class="reel__fallback" src="assets/poster.webp" alt="" aria-hidden="true">
+        <img class="reel__fallback" src="assets/poster.webp" alt="" aria-hidden="true" width="1280" height="720">
 
         <div class="reel__progress" aria-hidden="true">
           <span class="reel__pct">0%</span>
@@ -160,20 +173,20 @@
 
       <div class="products__grid">
         <article class="product-card product-card--tall ar">
-          <img src="assets/cards/bra-starflower.webp" loading="lazy" alt="The Signature Sports Bra in the Starflower print">
-          <a class="btn btn--ghost" href="/products/bra-starflower">Check our product <span class="btn__icon" aria-hidden="true"></span></a>
+          <img src="assets/cards/bra-starflower.webp" loading="lazy" alt="The Signature Sports Bra in the Starflower print" width="877" height="1100">
+          <a class="btn btn--ghost" href="/products/bra-starflower" aria-label="Check our product: The Signature Sports Bra in the Starflower print">Check our product <span class="btn__icon" aria-hidden="true"></span></a>
         </article>
         <article class="product-card product-card--wide ar">
-          <img src="assets/cards/legging-bluebird.webp" loading="lazy" alt="The Signature Legging in the Bluebird print">
-          <a class="btn btn--ghost" href="/products/legging-bluebird">Check our product <span class="btn__icon" aria-hidden="true"></span></a>
+          <img src="assets/cards/legging-bluebird.webp" loading="lazy" alt="The Signature Legging in the Bluebird print" width="877" height="1100">
+          <a class="btn btn--ghost" href="/products/legging-bluebird" aria-label="Check our product: The Signature Legging in the Bluebird print">Check our product <span class="btn__icon" aria-hidden="true"></span></a>
         </article>
         <article class="product-card product-card--wide ar">
-          <img src="assets/cards/refined-jacket.webp" loading="lazy" alt="The Refined Jacket, front view">
-          <a class="btn btn--ghost" href="/products/refined-jacket">Check our product <span class="btn__icon" aria-hidden="true"></span></a>
+          <img src="assets/cards/refined-jacket.webp" loading="lazy" alt="The Refined Jacket, front view" width="877" height="1100">
+          <a class="btn btn--ghost" href="/products/refined-jacket" aria-label="Check our product: The Refined Jacket">Check our product <span class="btn__icon" aria-hidden="true"></span></a>
         </article>
         <article class="product-card product-card--wide ar">
-          <img src="assets/cards/shoulder-bag-wide.webp" loading="lazy" alt="The Active Shoulder Bag">
-          <a class="btn btn--ghost" href="/products/active-shoulder-bag">Check our product <span class="btn__icon" aria-hidden="true"></span></a>
+          <img src="assets/cards/shoulder-bag-wide.webp" loading="lazy" alt="The Active Shoulder Bag" width="1760" height="1155">
+          <a class="btn btn--ghost" href="/products/active-shoulder-bag" aria-label="Check our product: The Active Shoulder Bag">Check our product <span class="btn__icon" aria-hidden="true"></span></a>
         </article>
       </div>
     </section>
@@ -184,7 +197,9 @@
         <a class="btn btn--solid" href="locations.html">See locations <span class="btn__icon" aria-hidden="true"></span></a>
       </div>
       <div class="atlas__wrap ar">
-<svg class="wmap" viewBox="0 0 1200 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="World map of ABIRA wholesale locations">
+<!-- role="group", not role="img": the pins inside are focusable buttons, and
+     role="img" would tell assistive tech this is one flat picture. -->
+<svg class="wmap" viewBox="0 0 1200 560" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="World map of ABIRA wholesale locations">
   <defs>
     <pattern id="landdots" width="9" height="9" patternUnits="userSpaceOnUse">
       <circle cx="4.5" cy="4.5" r="1.7" fill="rgba(244,243,241,.34)"/>
@@ -254,7 +269,7 @@
 
     <section class="cta" id="contact">
       <div class="cta__panel">
-        <img class="cta__mark ar" src="assets/cta-mark.png" alt="ABIRA mark">
+        <img class="cta__mark ar" src="assets/cta-mark.png" alt="ABIRA mark" width="414" height="257">
 
         <div class="cta__contact ar" style="--ar-delay:.15s">
           <a class="cta__line" href="mailto:hello@abiraactive.com">hello@abiraactive.com</a>

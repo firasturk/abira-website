@@ -7,7 +7,11 @@
   <meta name="description" content="The ABIRA collection: six signature prints across leggings and sports bras, plus a top, a jacket and two bags.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;1,500&family=Montserrat:wght@400;500;600&family=Unbounded:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- Loaded as print then flipped on load, so this third-party
+       stylesheet does not block the first paint. -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;1,500&family=Montserrat:wght@400;500;600&family=Unbounded:wght@300;400;500&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;1,500&family=Montserrat:wght@400;500;600&family=Unbounded:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;1,500&family=Montserrat:wght@400;500;600&family=Unbounded:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -29,7 +33,7 @@
 </head>
 <body>
 
-  <div class="loader" aria-hidden="true"><img src="assets/cta-mark.png" alt=""></div>
+  <div class="loader" aria-hidden="true"><img src="assets/cta-mark.png" alt="" width="414" height="257"></div>
 
   <header class="site-header">
     <a class="brand" href="index.html" aria-label="ABIRA — home">

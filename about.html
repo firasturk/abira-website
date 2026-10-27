@@ -7,7 +7,11 @@
   <meta name="description" content="The ABIRA story: founded by Abir to remove the compromise between style and performance in women's activewear.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;1,500&family=Montserrat:wght@400;500;600&family=Unbounded:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- Loaded as print then flipped on load, so this third-party
+       stylesheet does not block the first paint. -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;1,500&family=Montserrat:wght@400;500;600&family=Unbounded:wght@300;400;500&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;1,500&family=Montserrat:wght@400;500;600&family=Unbounded:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;1,500&family=Montserrat:wght@400;500;600&family=Unbounded:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -29,7 +33,7 @@
 </head>
 <body>
 
-  <div class="loader" aria-hidden="true"><img src="assets/cta-mark.png" alt=""></div>
+  <div class="loader" aria-hidden="true"><img src="assets/cta-mark.png" alt="" width="414" height="257"></div>
 
   <header class="site-header">
     <a class="brand" href="index.html" aria-label="ABIRA — home">
@@ -93,7 +97,7 @@
       </div>
       <figure class="story__media ar" style="--ar-delay:.15s">
         <img src="assets/shoot/678A2328.webp" loading="lazy"
-             alt="Model wearing The Signature Sports Bra and Legging in the Starflower print">
+             alt="Model wearing The Signature Sports Bra and Legging in the Starflower print" width="934" height="1400">
       </figure>
     </section>
 
@@ -110,7 +114,7 @@
       </div>
       <figure class="story__media ar" style="--ar-delay:.15s">
         <img src="assets/shoot/678A2521.webp" loading="lazy"
-             alt="Model wearing The Signature Legging in the Rosalia print">
+             alt="Model wearing The Signature Legging in the Rosalia print" width="934" height="1400">
       </figure>
     </section>
 

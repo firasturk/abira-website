@@ -450,21 +450,42 @@
     }
   }
 
-  loadFrame(0).then(() => {
-    firstFrameReady = true;
-    sizeCanvas();
-    render(true);
-    // Load the rest with limited concurrency so the page stays responsive.
-    let next = 1;
-    const workers = Array.from({ length: 6 }, async function work() {
-      while (next < FRAME_COUNT) {
-        const i = next++;
-        await loadFrame(i);
-        updateLoader();
-      }
+  function startLoading() {
+    loadFrame(0).then(() => {
+      firstFrameReady = true;
+      sizeCanvas();
+      render(true);
+      // Load the rest with limited concurrency so the page stays responsive.
+      let next = 1;
+      const workers = Array.from({ length: 6 }, async function work() {
+        while (next < FRAME_COUNT) {
+          const i = next++;
+          await loadFrame(i);
+          updateLoader();
+        }
+      });
+      Promise.all(workers).then(updateLoader);
     });
-    Promise.all(workers).then(updateLoader);
-  });
+  }
+
+  // 97 frames is a few megabytes. Starting them at parse time stole bandwidth
+  // from the hero image and pushed LCP past five seconds on a phone, so hold
+  // off until the reel is within a couple of screens, or until the rest of the
+  // page has finished loading, whichever comes first. The poster covers the
+  // canvas in the meantime.
+  let loadingStarted = false;
+  const kickOff = () => { if (!loadingStarted) { loadingStarted = true; startLoading(); } };
+
+  if ('IntersectionObserver' in window) {
+    const warmUp = new IntersectionObserver((entries) => {
+      if (entries.some(e => e.isIntersecting)) { warmUp.disconnect(); kickOff(); }
+    }, { rootMargin: '200% 0px' });
+    warmUp.observe(reel);
+    if (document.readyState === 'complete') setTimeout(kickOff, 400);
+    else window.addEventListener('load', () => setTimeout(kickOff, 400), { once: true });
+  } else {
+    kickOff();
+  }
 
   /* --- canvas sizing + cover draw with focal point --- */
 
