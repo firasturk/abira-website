@@ -372,7 +372,7 @@
           show('Thanks, ' + firstName + '. Your message is with us. We reply within two business days.');
           clear();
         }).catch(() => {
-          show('Sorry, that did not go through. Please email us at info@abiraactive.com and we will pick it up from there.');
+          show('Sorry, that did not go through. Please email us at hello@abiraactive.com and we will pick it up from there.');
         }).finally(() => { btn.disabled = false; });
         return;
       }
@@ -382,7 +382,7 @@
       const body = 'Name: ' + name.value.trim() +
         '\nEmail: ' + email.value.trim() +
         '\n\n' + message.value.trim();
-      window.location.href = 'mailto:info@abiraactive.com' +
+      window.location.href = 'mailto:hello@abiraactive.com' +
         '?subject=' + encodeURIComponent(subject.value.trim()) +
         '&body=' + encodeURIComponent(body);
       show('Thanks, ' + firstName + '. Your email app is opening with the message ready — press send and it reaches us.');
