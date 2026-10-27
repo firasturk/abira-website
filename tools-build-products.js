@@ -36,8 +36,10 @@ for (const p of products) {
   const title = full + ' — ABIRA';
   const desc  = (p.desc || '').replace(/\s+/g, ' ').trim().slice(0, 155);
   const url   = SITE + '/products/' + p.id;
-  const lead  = (p.gallery && p.gallery[0] && p.gallery[0].img) || p.img;
-  const image = SITE + '/assets/' + lead;
+  // Share card: the pre-built 1200x630 JPEG. Scrapers skip WebP and crop
+  // portrait shots badly, so the gallery image is never used here.
+  const image = SITE + '/assets/og/' + p.id + '.jpg';
+  const imgAlt = full + ', by ABIRA';
 
   const html = tpl
     .replace('<title>Product, ABIRA</title>', '<title>' + esc(title) + '</title>')
@@ -45,7 +47,8 @@ for (const p of products) {
     .replace('href="https://abiraactive.com/product.html"', 'href="' + url + '"')
     .replace('content="Product, ABIRA"', 'content="' + esc(title) + '"')
     .replace('content="https://abiraactive.com/product.html"', 'content="' + url + '"')
-    .replace('content="https://abiraactive.com/assets/editorial/6_starflower.webp"', 'content="' + esc(image) + '"')
+    .replace(/content="https:\/\/abiraactive\.com\/assets\/og-image\.jpg"/g, 'content="' + esc(image) + '"')
+    .replace(/<meta property="og:image:alt" content="[^"]*">/, '<meta property="og:image:alt" content="' + esc(imgAlt) + '">')
     .replace('<meta property="og:type" content="website">', '<meta property="og:type" content="product">\n  <meta property="og:description" content="' + esc(desc) + '">')
     .replace('<h1 id="pdp-name">Product</h1>', '<h1 id="pdp-name">' + esc(full) + '</h1>')
     .replace('<script src="/js/products-data.js" defer></script>',

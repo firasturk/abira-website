@@ -132,8 +132,13 @@
     setMeta('meta[property="og:title"]', fullName + ' — ABIRA');
     setMeta('meta[property="og:description"]', blurb);
     setMeta('meta[property="og:url"]', location.href);
-    const lead = (product.gallery && product.gallery[0] && product.gallery[0].img) || product.img;
-    if (lead) setMeta('meta[property="og:image"]', new URL('/assets/' + lead, location.href).href);
+    // Share cards: point at the pre-built 1200x630 JPEG for this product.
+    // Scrapers ignore WebP and want a landscape image, so never hand them a
+    // gallery shot here.
+    const card = new URL('/assets/og/' + product.id + '.jpg', location.href).href;
+    setMeta('meta[property="og:image"]', card);
+    setMeta('meta[name="twitter:image"]', card);
+    setMeta('meta[property="og:image:alt"]', fullName + ', by ABIRA');
     const canon = document.head.querySelector('link[rel="canonical"]');
     if (canon) canon.setAttribute('href', location.href);
 
