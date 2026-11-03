@@ -1470,23 +1470,6 @@ html.is-ready .hero__cta .btn { transition-delay: .5s; }
   border-bottom: 1px solid rgba(244, 243, 241, .08);
 }
 
-/* The one-line version: a quiet band, the sentence centred and nothing else. */
-.giving--line {
-  padding-block: clamp(2.6rem, 5vw, 4rem);
-  text-align: center;
-}
-.giving__sentence {
-  margin: 0;
-  font-family: var(--font-ui);
-  font-size: clamp(.84rem, 1.5vw, 1rem);
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--white);
-}
-.giving__sentence b {
-  font-weight: inherit;
-  color: var(--magenta);
-}
 .giving__inner {
   max-width: 1180px;
   margin: 0 auto;
