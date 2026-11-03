@@ -8,20 +8,32 @@
 // The bags carry their own product photography.
 
 (function () {
-  var LEG_DESC = 'A sculpting, high-rise legging featuring signature artwork along the leg.';
-  var BRA_DESC = 'A supportive sports bra featuring signature artwork across the front.';
+  var LEG_DESC = 'A sculpting, high-rise legging featuring signature artwork.';
+  var BRA_DESC = 'A supportive sports bra featuring signature artwork.';
   var FABRIC   = 'Nylon 80% / Spandex 20%';
   var SIZES    = 'XS to XL (US sizing)';
   var PROPS    = ['UV protection', 'Anti bacterial', 'Cloud soft'];
 
+  // Care, as supplied by the client. Garments carry the full guide; the bags
+  // carry the single line that applies to them.
+  var CARE_GARMENT = {
+    lines: ['Machine wash cold',
+            'Do not bleach',
+            'Tumble dry on low heat',
+            'Do not iron',
+            'Do not dry clean'],
+    note: 'To keep your piece looking its best: wash cold, inside out, with similar colours and skip fabric softener.'
+  };
+  var CARE_BAG = { lines: ['Do not wash'] };
+
   // Each print: [slug, display name, note]
   var PRINTS = [
-    ['bluebird',     'Bluebird',     'Bluebirds in flight over blossom — freedom.'],
-    ['wildflower',   'Wildflower',   'Scattered poppies and wild blooms — energy.'],
-    ['rosalia',      'Rosalia',      'Deep red roses on green — confidence.'],
-    ['cherry-bloom', 'Cherry Bloom', 'White cherry blossom and fruit — joy.'],
-    ['dragon-rose',  'Dragon Rose',  'Gold dragon coiled through roses — strength inside softness.'],
-    ['starflower',   'Starflower',   'Peonies and star blooms in pink and lilac — grace.']
+    ['bluebird',     'Bluebird',     'Bluebirds for freedom.'],
+    ['wildflower',   'Wildflower',   'Wild poppies for energy.'],
+    ['rosalia',      'Rosalia',      'Red roses for confidence.'],
+    ['cherry-bloom', 'Cherry Bloom', 'Cherry blossoms for joy.'],
+    ['dragon-rose',  'Dragon Rose',  'Dragon roses for the strength inside softness.'],
+    ['starflower',   'Starflower',   'Soft peonies for grace.']
   ];
 
   // The five detail frames, in gallery order, per family.
@@ -90,6 +102,7 @@
       alt: legLabel,
       composition: FABRIC,
       sizes: SIZES,
+      care: CARE_GARMENT,
       properties: PROPS,
       gallery: gallery(legId, 'legging', legLabel, slug)
     });
@@ -106,6 +119,7 @@
       alt: braLabel,
       composition: FABRIC,
       sizes: SIZES,
+      care: CARE_GARMENT,
       properties: PROPS,
       gallery: gallery(braId, 'bra', braLabel, slug)
     });
@@ -122,6 +136,7 @@
     alt: 'Model wearing The Motion Top',
     composition: 'Polyester 88% / Spandex 12%',
     sizes: SIZES,
+    care: CARE_GARMENT,
     properties: PROPS,
     gallery: gallery('motion-top', 'top', 'The Motion Top', 'motion-top')
   });
@@ -137,6 +152,7 @@
     alt: 'Model wearing The Refined Jacket',
     composition: FABRIC,
     sizes: SIZES,
+    care: CARE_GARMENT,
     properties: PROPS,
     gallery: gallery('refined-jacket', 'jacket', 'The Refined Jacket', 'refined-jacket')
   });
@@ -152,6 +168,7 @@
     alt: 'The Active Shoulder Bag',
     composition: '100% Polyester, black',
     sizes: 'One size',
+    care: CARE_BAG,
     properties: [],
     gallery: [
       { img: 'details/shoulder-bag-1.webp', alt: 'The Active Shoulder Bag, three-quarter view' },
@@ -167,11 +184,12 @@
     name: 'The Essential Phone Bag',
     print: '',
     origin: '',
-    desc: 'A quilted crossbody designed to carry your phone and essentials, hands free.',
+    desc: 'A crossbody phone bag designed to carry your phone and essentials.',
     img: 'cards/phone-bag.webp',
     alt: 'The Essential Phone Bag',
     composition: '100% Polyester, black quilted, adjustable strap',
     sizes: 'One size',
+    care: CARE_BAG,
     properties: [],
     gallery: [
       { img: 'details/phone-bag-1.webp', alt: 'The Essential Phone Bag, front view' },

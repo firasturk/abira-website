@@ -83,7 +83,6 @@
       '</div>' +
       '<div class="shop-card__meta"><h3>' + p.name + '</h3></div>' +
       (sub ? '<p class="shop-card__sub">' + sub + '</p>' : '') +
-      '<p class="shop-card__desc">' + p.desc + '</p>' +
     '</article>';
   }
 
@@ -195,12 +194,31 @@
 
     // Specification list
     const spec = document.getElementById('pdp-spec');
-    const rows = [['Composition', product.composition], ['Sizes', product.sizes]];
+    const rows = [['Composition', product.composition], ['Care', product.care], ['Sizes', product.sizes]];
     if (product.print) rows.push(['Print', product.print]);
     rows.forEach(([k, v]) => {
       if (!v) return;
       const dt = document.createElement('dt'); dt.textContent = k;
-      const dd = document.createElement('dd'); dd.textContent = v;
+      const dd = document.createElement('dd');
+      if (typeof v === 'string') {
+        dd.textContent = v;
+      } else {
+        // Care: the washing lines, then the client's one-line tip underneath.
+        const ul = document.createElement('ul');
+        ul.className = 'pdp__care';
+        (v.lines || []).forEach(line => {
+          const li = document.createElement('li');
+          li.textContent = line;
+          ul.appendChild(li);
+        });
+        dd.appendChild(ul);
+        if (v.note) {
+          const note = document.createElement('p');
+          note.className = 'pdp__care-note';
+          note.textContent = v.note;
+          dd.appendChild(note);
+        }
+      }
       spec.appendChild(dt); spec.appendChild(dd);
     });
 

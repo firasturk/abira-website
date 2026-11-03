@@ -1075,7 +1075,9 @@ html.is-ready .hero__cta .btn { transition-delay: .5s; }
   .pillars { grid-template-columns: 1fr; }
   .story, .story--flip { grid-template-columns: 1fr; }
   .story--flip .story__media { order: 0; }
-  .story__media img { aspect-ratio: 4 / 3; }
+  /* The shoot frames are portrait (2:3). A 4/3 box cropped the model's head
+     and legs off on a phone, so the narrow layout keeps a portrait box too. */
+  .story__media img { aspect-ratio: 4 / 5; }
   .contact { grid-template-columns: 1fr; }
 }
 
@@ -1426,9 +1428,27 @@ html.is-ready .hero__cta .btn { transition-delay: .5s; }
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--grey);
-  align-self: center;
+  align-self: start;
+  padding-top: .12rem;
 }
 .pdp__spec dd { color: var(--white); }
+
+/* Care runs to several lines under Composition, so the label lines up with
+   the first of them rather than the middle of the block. */
+.pdp__care {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: .22rem;
+}
+.pdp__care-note {
+  margin-top: .6rem;
+  max-width: 36ch;
+  color: var(--grey);
+  font-size: .9rem;
+  line-height: 1.55;
+}
 
 .shop-card__sub {
   font-family: var(--font-ui);
@@ -1448,6 +1468,24 @@ html.is-ready .hero__cta .btn { transition-delay: .5s; }
   padding: clamp(4.5rem, 9vw, 8rem) var(--pad-x);
   border-top: 1px solid rgba(244, 243, 241, .08);
   border-bottom: 1px solid rgba(244, 243, 241, .08);
+}
+
+/* The one-line version: a quiet band, the sentence centred and nothing else. */
+.giving--line {
+  padding-block: clamp(2.6rem, 5vw, 4rem);
+  text-align: center;
+}
+.giving__sentence {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: clamp(.84rem, 1.5vw, 1rem);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+.giving__sentence b {
+  font-weight: inherit;
+  color: var(--magenta);
 }
 .giving__inner {
   max-width: 1180px;
